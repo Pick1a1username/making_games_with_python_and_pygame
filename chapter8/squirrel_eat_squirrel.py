@@ -127,7 +127,7 @@ def run_game():
 
     # start off with some random grass images on the screen
     for i in range(10):
-        grass_objs.append(make_new_grass(camerax, cameray)) # ????
+        grass_objs.append(make_new_grass(camerax, cameray))
         grass_objs[i]['x'] = random.randint(0, WINWIDTH)
         grass_objs[i]['y'] = random.randint(0, WINHEIGHT)
 
@@ -157,10 +157,11 @@ def run_game():
                         (s_obj['width'], s_obj['height']))
 
         # go through all the objects and see if any need to be deleted.
-        for i in range(len(grass_objs) - 1, -1, -1):  # ????
+        # The iteration is done in a reverse order so that index error doesn't occur.
+        for i in range(len(grass_objs) - 1, -1, -1):
             if is_outside_active_area(camerax, cameray, grass_objs[i]):
                 del grass_objs[i]
-        for i in range(len(squirrel_objs) - 1, -1, -1): # ????
+        for i in range(len(squirrel_objs) - 1, -1, -1):
             if is_outside_active_area(camerax, cameray, squirrel_objs[i]):
                 del squirrel_objs[i]
                     
@@ -173,14 +174,14 @@ def run_game():
         # adjust camerax and cameray if beyond the "camera slack"
         player_centerx = player_obj['x'] + int(player_obj['size'] / 2)
         player_centery = player_obj['y'] + int(player_obj['size'] / 2)
-        if (camerax + HALF_WINWIDTH) - player_centerx > CAMERASLACK: # ????
-            camerax = player_centerx + CAMERASLACK - HALF_WINWIDTH # ????
-        elif player_centerx - (camerax + HALF_WINWIDTH) > CAMERASLACK: # ????
-            camerax = player_centerx - CAMERASLACK - HALF_WINWIDTH # ????
-        if (cameray + HALF_WINHEIGHT) - player_centery > CAMERASLACK: # ????
-            cameray = player_centery + CAMERASLACK - HALF_WINHEIGHT # ????
-        elif player_centery - (cameray + HALF_WINHEIGHT) > CAMERASLACK: # ????
-            cameray = player_centery - CAMERASLACK - HALF_WINHEIGHT # ????
+        if (camerax + HALF_WINWIDTH) - player_centerx > CAMERASLACK: # Too left
+            camerax = player_centerx + CAMERASLACK - HALF_WINWIDTH
+        elif player_centerx - (camerax + HALF_WINWIDTH) > CAMERASLACK:
+            camerax = player_centerx - CAMERASLACK - HALF_WINWIDTH
+        if (cameray + HALF_WINHEIGHT) - player_centery > CAMERASLACK:
+            cameray = player_centery + CAMERASLACK - HALF_WINHEIGHT
+        elif player_centery - (cameray + HALF_WINHEIGHT) > CAMERASLACK:
+            cameray = player_centery - CAMERASLACK - HALF_WINHEIGHT
 
         # draw the green background
         DISPLAYSURF.fill(GRASSCOLOR)
@@ -328,7 +329,7 @@ def get_bounce_amount(current_bounce, bounce_rate, bounce_height):
     # Larger bounce_rate means a slower bounce.
     # Larger bounce_height means a higher bounce.
     # current_bounce will always be less than bounce_rate
-    return int(math.sin( (math.pi / float(bounce_rate)) * current_bounce) * bounce_height) # ????
+    return int(math.sin( (math.pi / float(bounce_rate)) * current_bounce) * bounce_height)
 
 def get_random_velocity():
     speed = random.randint(SQUIRRELMINSPEED, SQUIRRELMAXSPEED)
