@@ -287,10 +287,10 @@ def decorate_map(map_obj, startxy): # ????
     for x in range(len(map_obj_copy)):
         for y in range(len(map_obj_copy[0])):
             if map_obj_copy[x][y] in ('$', '.', '@', '+', '*'):
-                map_obj_copy[x][y] = ''
+                map_obj_copy[x][y] = ' '
 
     # Flood fill to determine inside/outside floor tiles.
-    flood_fill(map_obj_copy, startx, starty, '', 'o') 
+    flood_fill(map_obj_copy, startx, starty, ' ', 'o') 
 
     # Convert the adjoined walls into corner tiles.
     for x in range(len(map_obj_copy)):
@@ -302,7 +302,7 @@ def decorate_map(map_obj, startxy): # ????
                    (is_wall(map_obj_copy, x-1, y) and is_wall(map_obj_copy, x, y-1)):
                     map_obj_copy[x][y] = 'x'
 
-            elif map_obj_copy[x][y] == '' and random.randint(0, 99) < OUTSIDE_DECORATION_PCT:
+            elif map_obj_copy[x][y] == ' ' and random.randint(0, 99) < OUTSIDE_DECORATION_PCT:
                 map_obj_copy[x][y] = random.choice(list(OUTSIDEDECOMAPPING.keys()))
 
     return map_obj_copy
