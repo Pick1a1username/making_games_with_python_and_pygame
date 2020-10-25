@@ -128,11 +128,11 @@ def run_level(levels, level_num):
     map_needs_redraw = True # set to True to call draw_map()
     level_surf = BASICFONT.render('Level %s of %s' % (level_num + 1, len(levels)), 1, TEXTCOLOR)
     level_rect = level_surf.get_rect()
-    level_rect.bottomleft = (20, WINHEIGHT - 35) # ????
-    map_width = len(map_obj) * TILEWIDTH # ????
+    level_rect.bottomleft = (20, WINHEIGHT - 35)
+    map_width = len(map_obj) * TILEWIDTH # the size of the width of the maps in pixels
     map_height = (len(map_obj[0]) - 1) * (TILEHEIGHT - TILEFLOORHEIGHT) + TILEHEIGHT # ????
-    MAX_CAM_X_PAN = abs(HALF_WINHEIGHT - int(map_height / 2)) + TILEWIDTH # ????
-    MAX_CAM_Y_PAN = abs(HALF_WINWIDTH - int(map_width / 2)) + TILEHEIGHT # ????
+    MAX_CAM_X_PAN = abs(HALF_WINHEIGHT - int(map_height / 2)) + TILEWIDTH
+    MAX_CAM_Y_PAN = abs(HALF_WINWIDTH - int(map_width / 2)) + TILEHEIGHT
 
     level_is_complete = False
     # Track how much the camera has moved:
@@ -375,7 +375,7 @@ def start_screen():
     top_coord = 50 # top_coord tracks where to position the top of the text
     title_rect.top = top_coord
     title_rect.centerx = HALF_WINWIDTH
-    top_coord += title_rect.height # ????
+    top_coord += title_rect.height
 
     # Unfortunately, Pygame's font & text system only shows one line at
     # a time, so we can't use strings with \n new line characters in them.
